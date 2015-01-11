@@ -1,5 +1,6 @@
 # Ignore build generated files
 build
+.lock-*
 
 ### OSX ###
 .DS_Store

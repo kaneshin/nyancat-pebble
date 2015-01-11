@@ -1,4 +1,4 @@
-// nyancat.c
+// app.c
 //
 // Copyright (c) 2015 Shintaro Kaneko
 //
@@ -20,28 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "nyancat.h"
-
 #include "app.h"
 
-static TextLayer *text_layer;
+#include "nyancat.h"
 
-void nyancat_init(void)
+Window *app_window;
+
+static void window_load(Window *window)
 {
-    Layer *window_layer = window_get_root_layer(app_window);
-    GRect bounds = layer_get_bounds(window_layer);
-    GRect rect = (GRect) {
-        .origin = {0, 72},
-        .size = {bounds.size.w, 20}
-    };
-    text_layer = text_layer_create(rect);
-    text_layer_set_text(text_layer, "Hello world");
-    text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-    layer_add_child(window_layer, text_layer_get_layer(text_layer));
+    nyancat_init();
 }
 
-void nyancat_deinit(void)
+static void window_unload(Window *window)
 {
-    text_layer_destroy(text_layer);
+    nyancat_deinit();
+}
+
+void app_init(void)
+{
+    app_window = window_create();
+    WindowHandlers handlers = (WindowHandlers) {
+        .load = window_load,
+        .unload = window_unload,
+    };
+    window_set_window_handlers(app_window, handlers);
+    window_stack_push(app_window, true);
+}
+
+void app_deinit(void)
+{
+    window_destroy(app_window);
 }
 

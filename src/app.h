@@ -1,4 +1,4 @@
-// nyancat.c
+// app.h
 //
 // Copyright (c) 2015 Shintaro Kaneko
 //
@@ -20,28 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "nyancat.h"
+#ifndef _APP_H_
+#define _APP_H_
 
-#include "app.h"
+#include <pebble.h>
 
-static TextLayer *text_layer;
+extern Window *app_window;
 
-void nyancat_init(void)
-{
-    Layer *window_layer = window_get_root_layer(app_window);
-    GRect bounds = layer_get_bounds(window_layer);
-    GRect rect = (GRect) {
-        .origin = {0, 72},
-        .size = {bounds.size.w, 20}
-    };
-    text_layer = text_layer_create(rect);
-    text_layer_set_text(text_layer, "Hello world");
-    text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-    layer_add_child(window_layer, text_layer_get_layer(text_layer));
-}
+void app_init(void);
+void app_deinit(void);
 
-void nyancat_deinit(void)
-{
-    text_layer_destroy(text_layer);
-}
+#endif /* _APP_H_ */
 
