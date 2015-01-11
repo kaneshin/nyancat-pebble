@@ -1,0 +1,17 @@
+{
+  "uuid": "2cb244fb-3d68-4bc5-8a4e-81b37f088079",
+  "shortName": "nyancat",
+  "longName": "nyancat",
+  "companyName": "MakeAwesomeHappen",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
